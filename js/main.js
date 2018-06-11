@@ -4,6 +4,19 @@ let restaurants,
 var map
 var markers = []
 
+/*--------------Service Worker Registration--------------*/
+
+if('serviceWorker' in navigator) { //check to see if user browser has service worker
+	window.addEventListener('load', function() {
+		navigator.serviceWorker.register('/sw.js').then(function(reg) {
+			console.log('Registration of Service Worker successful', reg);
+		}).catch(function(err) {
+			console.log('Registration of Service Worker unsuccessful', err);
+		});
+	})
+}
+
+
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -179,3 +192,10 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 }
+
+
+
+
+
+
+
